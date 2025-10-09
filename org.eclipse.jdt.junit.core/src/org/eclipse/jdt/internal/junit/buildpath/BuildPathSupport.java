@@ -397,6 +397,13 @@ public class BuildPathSupport {
 	}
 
 	/**
+	 * @return the JUnit6 classpath container
+	 */
+	public static IClasspathEntry getJUnit6ClasspathEntry() {
+		return JavaCore.newContainerEntry(JUnitCore.JUNIT5_CONTAINER_PATH);
+	}
+
+	/**
 	 * @return the org.junit version 3 library, or <code>null</code> if not available
 	 */
 	public static IClasspathEntry getJUnit3LibraryEntry() {
