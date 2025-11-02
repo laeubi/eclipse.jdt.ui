@@ -1,0 +1,22 @@
+diff --git a/org.eclipse.jdt.core/formatter/org/eclipse/jdt/internal/formatter/TokenManager.java b/org.eclipse.jdt.core/formatter/org/eclipse/jdt/internal/formatter/TokenManager.java
+index ab9090a9bf..f2ab94db6a 100644
+--- a/org.eclipse.jdt.core/formatter/org/eclipse/jdt/internal/formatter/TokenManager.java
++++ b/org.eclipse.jdt.core/formatter/org/eclipse/jdt/internal/formatter/TokenManager.java
+@@ -239,6 +239,17 @@ public class TokenManager implements Iterable<Token> {
+ 	}
+ 
+ 	public int countLineBreaksBetween(String text, int startPosition, int endPosition) {
++		// Add bounds checking to prevent StringIndexOutOfBoundsException
++		if (startPosition < 0) {
++			startPosition = 0;
++		}
++		if (endPosition > text.length()) {
++			endPosition = text.length();
++		}
++		if (startPosition >= endPosition) {
++			return 0;
++		}
++		
+ 		int result = 0;
+ 		for (int i = startPosition; i < endPosition; i++) {
+ 			switch (text.charAt(i)) {
